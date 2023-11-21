@@ -20,4 +20,14 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-
+//* Close modal
+//^ Getting close button
+const modalClose = document.querySelector(".close")
+//^ Creating close function
+function closeModal() {
+  if (modalbg.style.display == "block") {
+    modalbg.style.display = "none";
+  }
+}
+//^ Setting the event
+modalClose.addEventListener("click", closeModal)
