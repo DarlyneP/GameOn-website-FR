@@ -139,7 +139,7 @@ main {
 
 /* Modal form */
 
-.button {
+.button, .close-modal {
   background: #fe142f;
   margin-top: 0.5em;
   padding: 1em;
@@ -149,7 +149,7 @@ main {
   font-size: 16px;
 }
 
-.button:hover {
+.button:hover, .close-modal:hover {
   background: #3876ac;
 }
 
@@ -332,6 +332,55 @@ input[data-error]::after {
   color: #fff;
   cursor: pointer;
   border: 0;
+}
+
+/** additional elements*/
+.confirm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.confirm p {
+  text-align: center;
+  margin-top: 60%;
+  width: 192px;
+  /*^ no flex*/
+  /* margin-left: 27%; */
+  /*^ with flex*/
+  align-self: center;
+}
+.confirm .close-modal {
+  width: 182.55px !important;
+  text-align: center;
+  /*^ no flex*/
+  /* margin-left: 39%;
+  position: relative;
+  bottom: -46%; */
+  /*^ with flex*/
+  width: fit-content;
+  align-self: center;
+  position: relative;
+  /* bottom: -81%; */
+}
+
+.alert {
+  font-size: 10px;
+  font-weight: 400;
+  color: red;
+  line-height: 14.26px;
+  margin-left: -5px;
+  display: none;
+}
+
+/* .formData:nth-of-type(2) {
+  max-height: 85px;
+} */
+
+@media screen and (min-width: 375px) {
+  .confirm .close-modal {
+    /* bottom: -54%; */
+  }
 }
 /* custom select styles */
 .custom-select {
