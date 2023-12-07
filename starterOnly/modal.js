@@ -149,19 +149,24 @@ newsletter.addEventListener("click", checkNewsletter);
 //& Validating form
 //? getting the validate button
 const validateForm = document.querySelector(".btn-submit");
+
 //? making it functional
 validateForm.addEventListener("click", updateForm)
 //validateForm.addEventListener("click", confirm)
 //& Creating the validation function
 //& Saving the form data
 function updateForm(event/*, signUpForm*/) {
+  event.preventDefault()
   const terms = modalbg.querySelector(".terms")
+
   //^ Getting form fields
   const formEntries = modalbg.querySelectorAll("input");
+
   //^ Getting newsletter choice
-  //! newsletter is created again within the scope of updateForm() so that the current value can be save instead of being blocked on the first value evr entered
+  //! newsletter is created again within the scope of updateForm() so that the current value can be saved instead of being blocked on the first value ever entered
   const newsletter = modalbg.querySelector(".newsletter")
   console.log("newsletter choice", newsletter);
+
   //^Checking terms & conditions are accepted
   const termsAlert = document.querySelectorAll('.alert')[6]
   const alerts = document.querySelectorAll('.alert')
@@ -182,7 +187,43 @@ function updateForm(event/*, signUpForm*/) {
     console.log(alerts);
     console.log(alerts[1].style.display)
       for (let index = 0; index < 5/*alerts.length*/; index++) {
-        if (formEntries[index].value === "") {
+        if (index === 0 || index === 1) {
+          if (formEntries[index].value.length < 2) {
+            alerts[index].style.setProperty("display", "initial")
+            formEntries[index].style.border = 'solid red 2px'
+          } else if (formEntries[index].value.length > 2 && alerts[index].style.display === "initial") {
+            alerts[index].style.setProperty("display", "none")
+            formEntries[index].style.border = 'none'
+          }
+        }
+        if (index === 2) {
+          if (!formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/)) {
+            alerts[2].style.setProperty("display", "initial")
+            formEntries[2].style.border = 'solid red 2px'
+          }
+          if (formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/) && alerts[2].style.display === "initial") {
+            alerts[2].style.setProperty("display", "none")
+            formEntries[2].style.border = 'none'
+          }
+        }
+        if (!formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/)) {
+          alerts[3].style.setProperty("display", "initial")
+          formEntries[3].style.border = 'solid red 2px'
+        }
+        if (formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/) && alerts[3].style.display === "initial") {
+          alerts[3].style.setProperty("display", "none")
+          formEntries[3].style.border = 'none'
+        }
+        if (index === 4) {
+          if (!formEntries[4].value.match(/^[1-9][0-9]$/)) {
+            alerts[4].style.setProperty("display", "initial")
+            formEntries[4].style.border = 'solid red 2px'
+          } else if (formEntries[4].value.match(/^[1-9][0-9]$/) && alerts[index].style.display === "initial") {
+            alerts[4].style.setProperty("display", "none")
+            formEntries[4].style.border = 'none'
+          }
+        }
+        /*if (formEntries[index].value === "") {
           //alerts[index].style.display = 'initial'; //! not working
           //console.log(window.getComputedStyle(alerts[1]).getPropertyValue("display")) //! getting the style of alerts elements
           alerts[index].style.setProperty("display", "initial")
@@ -191,46 +232,98 @@ function updateForm(event/*, signUpForm*/) {
         if (formEntries[index].value !== "" && alerts[index].style.display === "initial") {
           alerts[index].style.setProperty("display", "none")
           formEntries[index].style.border = 'none'
-        }
+        }*/
       }
       if (chosenLocation === undefined || chosenLocation === "" || chosenLocation === null) {
         alerts[5].style.setProperty("display", "initial");
+        return;
       } else if (alerts[5].style.display === "initial"){
         if (chosenLocation !== undefined || chosenLocation !== "" || chosenLocation !== null) {
           alerts[5].style.setProperty("display", "none");
         }
       }
     } else {
+
     //^ saving name, surname, email, birthday, particpation count & location
     event.preventDefault()
     // saving location
     if (chosenLocation === undefined || chosenLocation === "" || chosenLocation === null) {
-      alerts[5].style.setProperty("display", "initial")
+      alerts[5].style.setProperty("display", "initial");
       return;
-    } else {
-      signUpForm.tournamentChoice = chosenLocation
-      chosenLocation = "";
+    } else if (alerts[5].style.display === "initial"){
+      if (chosenLocation !== undefined || chosenLocation !== "" || chosenLocation !== null) {
+        alerts[5].style.setProperty("display", "none");
+      }
+    }
+    if (chosenLocation !== undefined || chosenLocation !== "" || chosenLocation !== null) {
+      signUpForm.tournamentChoice = chosenLocation;
     }
     // saving name
-    signUpForm.name = formEntries[0].value //!pour une raison quelconque signUpForm est considéré comme undefined, il faut donc utiliser "this" à la place
-    formEntries[0].value = "";
-    //this.name = formEntries[0].value;
+    if (formEntries[0].value.length < 2 || !formEntries[0].value.match(/^[A-z]*/)) {
+      alerts[0].style.setProperty("display", "initial")
+      formEntries[0].style.border = 'solid red 2px'
+      return
+    } else if (formEntries[0].value.length > 2 && alerts[0].style.display === "initial") {
+      alerts[0].style.setProperty("display", "none")
+      formEntries[0].style.border = 'none'
+    }
+    if (formEntries[0].value.length > 2 && formEntries[0].value.match(/^[A-z]*/)) {
+      signUpForm.name = formEntries[0].value //!pour une raison quelconque signUpForm est considéré comme undefined, il faut donc utiliser "this" à la place 
+    }
+
     // saving surname
-    signUpForm.surname = formEntries[1].value
-    formEntries[1].value = "";
-    //this.surname = formEntries[1].value;
+    if (formEntries[1].value.length < 2 && !formEntries[1].value.match(/^[A-z]*/)) {
+      alerts[1].style.setProperty("display", "initial")
+      formEntries[1].style.border = 'solid red 2px'
+      return
+    } else if (formEntries[1].value.length > 2 && alerts[1].style.display === "initial") {
+      alerts[1].style.setProperty("display", "none")
+      formEntries[1].style.border = 'none'
+    }
+    if (formEntries[1].value.length > 2 && formEntries[1].value.match(/^[A-z]*/)) {
+      signUpForm.surname = formEntries[1].value;
+    }
+
     // saving email
-    signUpForm.email = formEntries[2].value
-    formEntries[2].value = "";
-    //this.email = formEntries[2].value;
+    if (!formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/)) {
+      alerts[2].style.setProperty("display", "initial")
+      formEntries[2].style.border = 'solid red 2px'
+      return;
+    }
+    if (formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/) && alerts[2].style.display === "initial") {
+      alerts[2].style.setProperty("display", "none")
+      formEntries[2].style.border = 'none';
+    }
+    if (formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/)) {
+      signUpForm.email = formEntries[2].value;
+    }
+
     // saving birthdate
-    signUpForm.birthdate = formEntries[3].value
-    formEntries[3].value = "";
-    //this.birthdate = formEntries[3].value;
+    if (!formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/)) {
+      alerts[3].style.setProperty("display", "initial")
+      formEntries[3].style.border = 'solid red 2px'
+      return;
+    }
+    if (formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/) && alerts[3].style.display === "initial") {
+      alerts[3].style.setProperty("display", "none")
+      formEntries[3].style.border = 'none';
+    }
+    if (formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/)) {
+      signUpForm.birthdate = formEntries[3].value;
+    }
+
     // saving participation
-    signUpForm.participationCount = formEntries[4].value
-    formEntries[4].value = "";
-    //this.participationCount = formEntries[4].value;
+    if (!formEntries[4].value.match(/^[1-9][0-9]$/)) {
+      alerts[4].style.setProperty("display", "initial")
+      formEntries[4].style.border = 'solid red 2px'
+      return;
+    } else if (formEntries[4].value.match(/^[1-9][0-9]$$/) && alerts[4].style.display === "initial") {
+      alerts[4].style.setProperty("display", "none")
+      formEntries[4].style.border = 'none'
+    }
+    if (formEntries[4].value.match(/^[1-9][0-9]$/)) {
+      signUpForm.participationCount = formEntries[4].value
+    }
 
     //^ saving newsletter choice
     if (newsletter.classList[2] === undefined || newsletter.classList[2] === "false") {
@@ -242,6 +335,13 @@ function updateForm(event/*, signUpForm*/) {
     //this.nextEventsNewsletter = formEntries[12].classList[1];
     // printing formData for checking
     console.log(signUpForm)
+
+    formEntries[0].value = "";
+    formEntries[1].value = "";
+    formEntries[2].value = "";
+    formEntries[3].value = "";
+    formEntries[4].value = "";
+    chosenLocation = "";
     confirm()
     return signUpForm;
   }
