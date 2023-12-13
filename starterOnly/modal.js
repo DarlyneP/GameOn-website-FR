@@ -225,11 +225,11 @@ function updateForm(event/*, signUpForm*/) {
           }
         }
         if (index === 2) {
-          if (!formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/)) {
+          if (!formEntries[2].value.match(/^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]*\.[a-zA-Z]{2,4}$/)) {
             alerts[2].style.setProperty("display", "initial")
             formEntries[2].style.border = 'solid red 2px'
           }
-          if (formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/) && alerts[2].style.display === "initial") {
+          if (formEntries[2].value.match(/^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]*\.[a-zA-Z]{2,4}$/) && alerts[2].style.display === "initial") {
             alerts[2].style.setProperty("display", "none")
             formEntries[2].style.border = 'none'
           }
@@ -326,17 +326,17 @@ function updateForm(event/*, signUpForm*/) {
     }
 
     // saving email
-    if (!formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/)) {
+    if (!formEntries[2].value.match(/^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]*\.[a-zA-Z]{2,4}$/)) {
       alerts[2].style.setProperty("display", "initial")
       formEntries[2].style.border = 'solid red 2px'
       emailCheck = ""
       //!return;
     }
-    if (formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/) && alerts[2].style.display === "initial") {
+    if (formEntries[2].value.match(/^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]*\.[a-zA-Z]{2,4}$/) && alerts[2].style.display === "initial") {
       alerts[2].style.setProperty("display", "none")
       formEntries[2].style.border = 'none';
     }
-    if (formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/)) {
+    if (formEntries[2].value.match(/^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]*\.[a-zA-Z]{2,4}$/)) {
       signUpForm.email = formEntries[2].value;
       emailCheck = true
     }
