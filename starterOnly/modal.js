@@ -1,11 +1,13 @@
+const nav = document.getElementById("myTopnav");
 function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
+  if (nav.className === "topnav") {
+    nav.className += " responsive";
   } else {
-    x.className = "topnav";
+    nav.className = "topnav";
   }
 }
+nav.addEventListener("click", editNav)
+
 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
