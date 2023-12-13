@@ -191,7 +191,7 @@ function updateForm(event/*, signUpForm*/) {
           if (formEntries[index].value.length < 2) {
             alerts[index].style.setProperty("display", "initial")
             formEntries[index].style.border = 'solid red 2px'
-          } else if (formEntries[index].value.length > 2 && alerts[index].style.display === "initial") {
+          } else if (formEntries[index].value.length >= 2 && alerts[index].style.display === "initial") {
             alerts[index].style.setProperty("display", "none")
             formEntries[index].style.border = 'none'
           }
@@ -206,19 +206,19 @@ function updateForm(event/*, signUpForm*/) {
             formEntries[2].style.border = 'none'
           }
         }
-        if (!formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/)) {
+        if (!formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/)) {
           alerts[3].style.setProperty("display", "initial")
           formEntries[3].style.border = 'solid red 2px'
         }
-        if (formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/) && alerts[3].style.display === "initial") {
+        if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/) && alerts[3].style.display === "initial") {
           alerts[3].style.setProperty("display", "none")
           formEntries[3].style.border = 'none'
         }
         if (index === 4) {
-          if (!formEntries[4].value.match(/^[1-9][0-9]$/)) {
+          if (!formEntries[4].value.match(/^^[1-9]$|[1-9][0-9]$/)) {
             alerts[4].style.setProperty("display", "initial")
             formEntries[4].style.border = 'solid red 2px'
-          } else if (formEntries[4].value.match(/^[1-9][0-9]$/) && alerts[index].style.display === "initial") {
+          } else if (formEntries[4].value.match(/^^[1-9]$|[1-9][0-9]$/) && alerts[index].style.display === "initial") {
             alerts[4].style.setProperty("display", "none")
             formEntries[4].style.border = 'none'
           }
@@ -263,11 +263,11 @@ function updateForm(event/*, signUpForm*/) {
       alerts[0].style.setProperty("display", "initial")
       formEntries[0].style.border = 'solid red 2px'
       return
-    } else if (formEntries[0].value.length > 2 && alerts[0].style.display === "initial") {
+    } else if (formEntries[0].value.length >= 2 && alerts[0].style.display === "initial") {
       alerts[0].style.setProperty("display", "none")
       formEntries[0].style.border = 'none'
     }
-    if (formEntries[0].value.length > 2 && formEntries[0].value.match(/^[A-z]*/)) {
+    if (formEntries[0].value.length >= 2 && formEntries[0].value.match(/^[A-z]*/)) {
       signUpForm.name = formEntries[0].value //!pour une raison quelconque signUpForm est considéré comme undefined, il faut donc utiliser "this" à la place 
     }
 
@@ -276,11 +276,11 @@ function updateForm(event/*, signUpForm*/) {
       alerts[1].style.setProperty("display", "initial")
       formEntries[1].style.border = 'solid red 2px'
       return
-    } else if (formEntries[1].value.length > 2 && alerts[1].style.display === "initial") {
+    } else if (formEntries[1].value.length >= 2 && alerts[1].style.display === "initial") {
       alerts[1].style.setProperty("display", "none")
       formEntries[1].style.border = 'none'
     }
-    if (formEntries[1].value.length > 2 && formEntries[1].value.match(/^[A-z]*/)) {
+    if (formEntries[1].value.length >= 2 && formEntries[1].value.match(/^[A-z]*/)) {
       signUpForm.surname = formEntries[1].value;
     }
 
@@ -299,29 +299,29 @@ function updateForm(event/*, signUpForm*/) {
     }
 
     // saving birthdate
-    if (!formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/)) {
+    if (!formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/)) {
       alerts[3].style.setProperty("display", "initial")
       formEntries[3].style.border = 'solid red 2px'
       return;
     }
-    if (formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/) && alerts[3].style.display === "initial") {
+    if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/) && alerts[3].style.display === "initial") {
       alerts[3].style.setProperty("display", "none")
       formEntries[3].style.border = 'none';
     }
-    if (formEntries[3].value.match(/^(19\d\d|200[0-5])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/)) {
+    if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/)) {
       signUpForm.birthdate = formEntries[3].value;
     }
 
     // saving participation
-    if (!formEntries[4].value.match(/^[1-9][0-9]$/)) {
+    if (!formEntries[4].value.match(/^[1-9]$|[1-9][0-9]$/)) {
       alerts[4].style.setProperty("display", "initial")
       formEntries[4].style.border = 'solid red 2px'
       return;
-    } else if (formEntries[4].value.match(/^[1-9][0-9]$$/) && alerts[4].style.display === "initial") {
+    } else if (formEntries[4].value.match(/^[1-9]$|[1-9][0-9]$/) && alerts[4].style.display === "initial") {
       alerts[4].style.setProperty("display", "none")
       formEntries[4].style.border = 'none'
     }
-    if (formEntries[4].value.match(/^[1-9][0-9]$/)) {
+    if (formEntries[4].value.match(/^[1-9]$|[1-9][0-9]$/)) {
       signUpForm.participationCount = formEntries[4].value
     }
 
