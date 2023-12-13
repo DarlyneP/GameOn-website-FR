@@ -377,11 +377,6 @@ input[data-error]::after {
   max-height: 85px;
 } */
 
-@media screen and (min-width: 375px) {
-  .confirm .close-modal {
-    /* bottom: -54%; */
-  }
-}
 /* custom select styles */
 .custom-select {
   position: relative;
@@ -546,10 +541,12 @@ footer {
   .hero-headline {
     font-size: 4.5rem;
     white-space: normal;
+    /* font-weight: 500; */
   }
   .hero-text {
     width: unset;
     font-size: 1.5rem;
+    /* font-size: 1rem; */
   }
   .hero-img img {
     border-radius: 10px;
@@ -576,3 +573,51 @@ footer {
   }
 }
 
+@media screen and (max-width: 550px) {
+
+  .hero-content {
+    padding: 0px;
+  }
+
+  .hero-text {
+    max-width: 350px;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 414px) {
+
+  .header-logo img {
+    width: 103px;
+    height: 19px;
+    margin-left: 15px;
+    margin-top: 15px;
+  }
+
+  .hero-headline {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .hero-text {
+    font-size: 0.9rem;
+    max-width: 330px;
+  }
+}
+
+/* .fa-bars:before {
+  color: red;
+  margin-top: 15px;
+} */
+
+.fa-bars {
+  color: red;
+  margin-top: 15px;
+}
+
+@media screen and (min-width: 540px) {
+  .fa-bars {
+    color: red;
+    margin-top: 0px;
+  }
+}
