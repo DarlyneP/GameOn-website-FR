@@ -1,4 +1,19 @@
+//~ DOM Elements
+const modalbg = document.querySelector(".bground");
+const modalBtn = document.querySelectorAll(".modal-btn");
+const formData = document.querySelectorAll(".formData");
 const nav = document.getElementById("myTopnav");
+
+//~ Form elements
+//^ Getting form fields & their alerts
+const formEntries = modalbg.querySelectorAll("input");
+const alerts = document.querySelectorAll('.alert')
+//^Getting newsletter checkbox input
+const newsletterInput = modalbg.querySelector("#checkbox2")
+//^ Getting close button
+const modalClose = document.querySelector(".close")
+
+// activate responsive design on navigation bar
 function editNav() {
   if (nav.className === "topnav") {
     nav.className += " responsive";
@@ -7,12 +22,6 @@ function editNav() {
   }
 }
 nav.addEventListener("click", editNav)
-
-
-// DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -66,15 +75,32 @@ function launchModal() {
 }
 
 //* Close modal
-//^ Getting close button
-const modalClose = document.querySelector(".close")
 //^ Creating close function
 function closeModal() {
   if (modalbg.style.display == "block") {
+    //? emptying form fields
+    // text inputs
+    for (let index = 0; index < 5; index++) {
+      formEntries[index].value = "";
+      formEntries[index].style.border = "none";
+    }
+    // radio buttons
+    for (let index = 5; index < 11; index++) {
+      formEntries[index].checked = false
+    }
+    //? removing alerts
+    for(const alert of alerts) {
+      alert.style.display = "none";
+    }
+    //? removing newsletter check
+    newsletter.classList.remove("true")
+    newsletterInput.checked = false
+    //newsletter.style.background = "#c4c4c4";
+    //? removing modal from screen
     modalbg.style.display = "none";
   }
 }
-//^ Setting the event
+//^ Setting the event on the close button
 modalClose.addEventListener("click", closeModal)
 
 //* Form entries
@@ -162,16 +188,16 @@ function updateForm(event/*, signUpForm*/) {
   const terms = modalbg.querySelector(".terms")
 
   //^ Getting form fields
-  const formEntries = modalbg.querySelectorAll("input");
+  const formEntries = modalbg.querySelectorAll("input"); // todo : remove if global instance works
 
   //^ Getting newsletter choice
   //! newsletter is created again within the scope of updateForm() so that the current value can be saved instead of being blocked on the first value ever entered
-  const newsletter = modalbg.querySelector(".newsletter")
+  const newsletter = modalbg.querySelector(".newsletter") // todo : remove if global instance works
   console.log("newsletter choice", newsletter);
 
   //^Checking terms & conditions are accepted
   const termsAlert = document.querySelectorAll('.alert')[6]
-  const alerts = document.querySelectorAll('.alert')
+  const alerts = document.querySelectorAll('.alert') // todo : remove if global instance works
   if (terms.classList[2] !== "true") {
     event.preventDefault()
     termsAlert.style.setProperty("display", "initial");
