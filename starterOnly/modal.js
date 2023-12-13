@@ -234,11 +234,11 @@ function updateForm(event/*, signUpForm*/) {
             formEntries[2].style.border = 'none'
           }
         }
-        if (!formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/)) {
+        if ( !formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/) || Date.now() < Date.parse(formEntries[3].value) ) {
           alerts[3].style.setProperty("display", "initial")
           formEntries[3].style.border = 'solid red 2px'
         }
-        if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/) && alerts[3].style.display === "initial") {
+        if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/) && Date.now() > Date.parse(formEntries[3].value) && alerts[3].style.display === "initial") {
           alerts[3].style.setProperty("display", "none")
           formEntries[3].style.border = 'none'
         }
@@ -251,16 +251,6 @@ function updateForm(event/*, signUpForm*/) {
             formEntries[4].style.border = 'none'
           }
         }
-        /*if (formEntries[index].value === "") {
-          //alerts[index].style.display = 'initial'; //! not working
-          //console.log(window.getComputedStyle(alerts[1]).getPropertyValue("display")) //! getting the style of alerts elements
-          alerts[index].style.setProperty("display", "initial")
-          formEntries[index].style.border = 'solid red 2px'
-        }
-        if (formEntries[index].value !== "" && alerts[index].style.display === "initial") {
-          alerts[index].style.setProperty("display", "none")
-          formEntries[index].style.border = 'none'
-        }*/
       }
       if (chosenLocation === undefined || chosenLocation === "" || chosenLocation === null) {
         alerts[5].style.setProperty("display", "initial");
@@ -342,17 +332,20 @@ function updateForm(event/*, signUpForm*/) {
     }
 
     // saving birthdate
-    if (!formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/)) {
+    if ( !formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/) || Date.now() < Date.parse(formEntries[3].value) ) {
       alerts[3].style.setProperty("display", "initial")
       formEntries[3].style.border = 'solid red 2px'
       birthdateCheck = ""
       //!return;
     }
-    if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/) && alerts[3].style.display === "initial") {
+    if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/) && Date.now() > Date.parse(formEntries[3].value) && alerts[3].style.display === "initial") {
       alerts[3].style.setProperty("display", "none")
       formEntries[3].style.border = 'none';
     }
     if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/)) {
+      /*if (Date.now() < Date.parse(formEntries[3].value)) {
+        
+      }*/
       signUpForm.birthdate = formEntries[3].value;
       birthdateCheck = true
     }
