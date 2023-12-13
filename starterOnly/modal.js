@@ -201,7 +201,7 @@ function updateForm(event/*, signUpForm*/) {
   if (terms.classList[2] !== "true") {
     event.preventDefault()
     termsAlert.style.setProperty("display", "initial");
-    return
+    //!return
     //alert("Veuillez accepter les conditions d'utilisation");
   } else if (termsAlert.style.display === 'initial') {
     termsAlert.style.setProperty("display", "none");
@@ -272,51 +272,65 @@ function updateForm(event/*, signUpForm*/) {
       }
     } else {
 
+      let firstnameCheck = "";
+      let lastnameCheck = "";
+      let emailCheck = "";
+      let birthdateCheck = "";
+      let participationCheck = "";
+      let locationCheck = "";
+
     //^ saving name, surname, email, birthday, particpation count & location
     event.preventDefault()
     // saving location
     if (chosenLocation === undefined || chosenLocation === "" || chosenLocation === null) {
       alerts[5].style.setProperty("display", "initial");
-      return;
-    } else if (alerts[5].style.display === "initial"){
-      if (chosenLocation !== undefined || chosenLocation !== "" || chosenLocation !== null) {
+      locationCheck = ""
+      //!return;
+    } else if (chosenLocation !== undefined || chosenLocation !== "" || chosenLocation !== null){
+      if (alerts[5].style.display === "initial") {
         alerts[5].style.setProperty("display", "none");
       }
+      signUpForm.tournamentChoice = chosenLocation;
+      locationCheck = true
     }
     if (chosenLocation !== undefined || chosenLocation !== "" || chosenLocation !== null) {
-      signUpForm.tournamentChoice = chosenLocation;
     }
     // saving name
     if (formEntries[0].value.length < 2 || !formEntries[0].value.match(/^[A-z]*/)) {
       alerts[0].style.setProperty("display", "initial")
       formEntries[0].style.border = 'solid red 2px'
-      return
+      firstnameCheck = ""
+      //!return
     } else if (formEntries[0].value.length >= 2 && alerts[0].style.display === "initial") {
       alerts[0].style.setProperty("display", "none")
       formEntries[0].style.border = 'none'
     }
     if (formEntries[0].value.length >= 2 && formEntries[0].value.match(/^[A-z]*/)) {
       signUpForm.name = formEntries[0].value //!pour une raison quelconque signUpForm est considéré comme undefined, il faut donc utiliser "this" à la place 
+      firstnameCheck = true
     }
 
     // saving surname
     if (formEntries[1].value.length < 2 && !formEntries[1].value.match(/^[A-z]*/)) {
       alerts[1].style.setProperty("display", "initial")
       formEntries[1].style.border = 'solid red 2px'
-      return
+      lastnameCheck = ""
+      //!return
     } else if (formEntries[1].value.length >= 2 && alerts[1].style.display === "initial") {
       alerts[1].style.setProperty("display", "none")
       formEntries[1].style.border = 'none'
     }
     if (formEntries[1].value.length >= 2 && formEntries[1].value.match(/^[A-z]*/)) {
       signUpForm.surname = formEntries[1].value;
+      lastnameCheck = true
     }
 
     // saving email
     if (!formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/)) {
       alerts[2].style.setProperty("display", "initial")
       formEntries[2].style.border = 'solid red 2px'
-      return;
+      emailCheck = ""
+      //!return;
     }
     if (formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/) && alerts[2].style.display === "initial") {
       alerts[2].style.setProperty("display", "none")
@@ -324,13 +338,15 @@ function updateForm(event/*, signUpForm*/) {
     }
     if (formEntries[2].value.match(/[a-z|0-9]*@(gmail.com|yahoo.com|yahoo.fr|hotmail.fr|free.fr|live.com|ymail.com|outlook.com|live.fr)/)) {
       signUpForm.email = formEntries[2].value;
+      emailCheck = true
     }
 
     // saving birthdate
     if (!formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/)) {
       alerts[3].style.setProperty("display", "initial")
       formEntries[3].style.border = 'solid red 2px'
-      return;
+      birthdateCheck = ""
+      //!return;
     }
     if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/) && alerts[3].style.display === "initial") {
       alerts[3].style.setProperty("display", "none")
@@ -338,19 +354,22 @@ function updateForm(event/*, signUpForm*/) {
     }
     if (formEntries[3].value.match(/^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[1-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/)) {
       signUpForm.birthdate = formEntries[3].value;
+      birthdateCheck = true
     }
 
     // saving participation
     if (!formEntries[4].value.match(/^[1-9]$|[1-9][0-9]$/)) {
       alerts[4].style.setProperty("display", "initial")
       formEntries[4].style.border = 'solid red 2px'
-      return;
+      participationCheck = "";
+      //!return;
     } else if (formEntries[4].value.match(/^[1-9]$|[1-9][0-9]$/) && alerts[4].style.display === "initial") {
       alerts[4].style.setProperty("display", "none")
       formEntries[4].style.border = 'none'
     }
     if (formEntries[4].value.match(/^[1-9]$|[1-9][0-9]$/)) {
       signUpForm.participationCount = formEntries[4].value
+      participationCheck = true
     }
 
     //^ saving newsletter choice
@@ -362,16 +381,21 @@ function updateForm(event/*, signUpForm*/) {
     }
     //this.nextEventsNewsletter = formEntries[12].classList[1];
     // printing formData for checking
-    console.log(signUpForm)
-
-    formEntries[0].value = "";
-    formEntries[1].value = "";
-    formEntries[2].value = "";
-    formEntries[3].value = "";
-    formEntries[4].value = "";
-    chosenLocation = "";
-    confirm()
-    return signUpForm;
+    if (firstnameCheck === true && lastnameCheck === true && emailCheck === true && birthdateCheck === true && participationCheck === true && locationCheck === true && terms.classList[2] === "true") {
+      
+      formEntries[0].value = "";
+      formEntries[1].value = "";
+      formEntries[2].value = "";
+      formEntries[3].value = "";
+      formEntries[4].value = "";
+      chosenLocation = "";
+      confirm()
+      return signUpForm;
+      console.log(signUpForm)
+      
+    } else {
+      return
+    }
   }
 }
 
