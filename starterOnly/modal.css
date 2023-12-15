@@ -615,7 +615,7 @@ footer {
   margin-top: 15px;
 }
 
-/** TITLE SIZING */
+/** TITLE SIZING ~ RESPONSIVE */
 @media screen and (min-width: 540px) {
   .fa-bars {
     color: red;
@@ -653,6 +653,7 @@ footer {
   }
 }
 
+/** IMAGE SIZING ~ RESPONSIVE */
 @media screen and (max-width: 1024px) and (min-width: 801px) {
   .hero-content::after {
     content: none;
