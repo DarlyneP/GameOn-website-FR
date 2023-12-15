@@ -621,3 +621,33 @@ footer {
     margin-top: 0px;
   }
 }
+
+@media screen and (min-width: 801px) {
+  .hero-headline {
+    font-size: 4.5rem;
+  }
+}
+
+@media screen and (min-width: 835px) {
+  .hero-headline {
+    font-size: 4.7rem;
+  }
+}
+
+@media screen and (min-width: 885px) {
+  .hero-headline {
+    font-size: 4.9rem;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .hero-headline {
+    font-size: 5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hero-headline {
+    font-size: 6rem;
+  }
+}
