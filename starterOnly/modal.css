@@ -662,4 +662,8 @@ footer {
   .hero-text {
     font-size: 20px;
   }
+
+  .hero-img img {
+    min-width: fit-content;
+  }
 }
